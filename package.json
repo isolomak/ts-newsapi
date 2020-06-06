@@ -1,0 +1,47 @@
+{
+  "name": "ts-newsapi",
+  "version": "1.0.0",
+  "description": "Client library (SDK) to quickly and easily get started with News API without worrying about the underlying set up.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "lint": "./node_modules/tslint/bin/tslint -p . -c tslint.json",
+    "test": "npm run lint && ./node_modules/.bin/jest --runInBand --passWithNoTests",
+    "prepare": "npm run lint && npm run build",
+    "prepublishOnly": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanSolomakhin/ts-newsapi.git"
+  },
+  "keywords": [
+    "news",
+    "api",
+    "newsapi",
+    "ts",
+    "typescript"
+  ],
+  "author": "isolomak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IvanSolomakhin/ts-newsapi/issues"
+  },
+  "homepage": "https://github.com/IvanSolomakhin/ts-newsapi#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.11",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "tslint": "^6.1.2",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.9.5"
+  },
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "LICENSE"
+  ]
+}
