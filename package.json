@@ -1,6 +1,6 @@
 {
   "name": "ts-newsapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client library (SDK) to quickly and easily get started with News API without worrying about the underlying set up",
   "main": "lib/index.js",
   "scripts": {
