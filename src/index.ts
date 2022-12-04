@@ -13,7 +13,7 @@ import {
  */
 export default class NewsAPI {
 
-	private static _URL: string = 'http://newsapi.org/v2';
+	private static _URL = 'http://newsapi.org/v2';
 
 	private readonly _apiKey: string;
 
@@ -87,7 +87,7 @@ export default class NewsAPI {
 	 * Search through millions of articles from over 50,000 large and small news sources and blogs.
 	 * This includes breaking news as well as lesser articles.
 	 * This endpoint suits article discovery and analysis,
-	 *  but can be used to retrieve articles for display, too.
+	 * but can be used to retrieve articles for display, too.
 	 */
 	public async getEverything(params: INewsApiEverythingParams = { }): Promise<INewsApiResponse> {
 		const endpointUrl = `${ NewsAPI._URL }/everything`;
