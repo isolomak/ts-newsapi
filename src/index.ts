@@ -1,20 +1,13 @@
 import axios from 'axios';
 import * as querystring from 'querystring';
 import {
-	ApiNewsCategory,
-	ApiNewsCountry,
-	ApiNewsLanguage,
-	ApiNewsResponseStatus,
-	ApiNewsSort,
-	INewsApiArticle,
 	INewsApiEverythingParams,
-	INewsApiResponse,
-	INewsApiSource,
-	INewsApiSourceItem,
-	INewsApiSourceParams,
+	INewsApiResponse, INewsApiSourceParams,
 	INewsApiSourcesResponse,
 	INewsApiTopHeadlinesParams
 } from './types';
+
+export * from './types';
 
 /**
  * Breaking news headlines, and search for articles from news sources and blogs all over the web
@@ -205,18 +198,4 @@ export default class NewsAPI {
 
 }
 
-export {
-	ApiNewsCountry,
-	ApiNewsLanguage,
-	ApiNewsResponseStatus,
-	ApiNewsCategory,
-	ApiNewsSort,
-	INewsApiTopHeadlinesParams,
-	INewsApiResponse,
-	INewsApiArticle,
-	INewsApiSource,
-	INewsApiEverythingParams,
-	INewsApiSourceParams,
-	INewsApiSourcesResponse,
-	INewsApiSourceItem,
-};
+
