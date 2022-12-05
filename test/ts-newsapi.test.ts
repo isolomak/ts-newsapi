@@ -1,13 +1,19 @@
-import axios from 'axios';
-import * as querystring from 'querystring';
+import fetch from 'node-fetch';
+import querystring from 'querystring';
 import NewsAPI from '../src';
 
-jest.mock('axios');
-// @ts-ignore
-axios.get.mockImplementation(() => Promise.resolve({ data: { } }));
+jest.mock('node-fetch');
+
+const { Response } = jest.requireActual('node-fetch');
+
+beforeEach(() => {
+	// @ts-ignore
+	fetch.mockReturnValue(Promise.resolve(new Response('{}')));
+});
+
+const TEST_API_KEY = 'test_api_key';
 
 describe('NewsAPI tests', () => {
-	const TEST_API_KEY = 'test_api_key';
 
 	const newsApi = new NewsAPI(TEST_API_KEY);
 
@@ -15,8 +21,8 @@ describe('NewsAPI tests', () => {
 
 		test('should fetch data successfully without params', async () => {
 			await expect( newsApi.getSources() ).resolves.toEqual({ });
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/sources?${ querystring.stringify({ apiKey: TEST_API_KEY }) }`
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/sources?${ querystring.stringify({ apiKey: TEST_API_KEY }) }`
 			);
 		});
 
@@ -29,8 +35,8 @@ describe('NewsAPI tests', () => {
 				})
 			).resolves.toEqual({ });
 
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/sources?` + [
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/sources?` + [
 					querystring.stringify({ apiKey: TEST_API_KEY }),
 					querystring.stringify({ category: 'business' }),
 					querystring.stringify({ language: 'en' }),
@@ -45,8 +51,8 @@ describe('NewsAPI tests', () => {
 
 		test('should fetch data successfully without params', async () => {
 			await expect( newsApi.getTopHeadlines() ).resolves.toEqual({ });
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/top-headlines?${ querystring.stringify({ apiKey: TEST_API_KEY }) }`
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/top-headlines?${ querystring.stringify({ apiKey: TEST_API_KEY }) }`
 			);
 		});
 
@@ -62,8 +68,8 @@ describe('NewsAPI tests', () => {
 				})
 			).resolves.toEqual({ });
 
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/top-headlines?` + [
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/top-headlines?` + [
 					querystring.stringify({ apiKey: TEST_API_KEY }),
 					querystring.stringify({ q: 'query' }),
 					querystring.stringify({ sources: [ 'test-source-1', 'test-source-2' ].join(',') }),
@@ -84,8 +90,8 @@ describe('NewsAPI tests', () => {
 				})
 			).resolves.toEqual({ });
 
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/top-headlines?` + [
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/top-headlines?` + [
 					querystring.stringify({ apiKey: TEST_API_KEY }),
 					querystring.stringify({ q: 'query' }),
 					querystring.stringify({ country: 'ua' }),
@@ -112,8 +118,8 @@ describe('NewsAPI tests', () => {
 
 		test('should fetch data successfully without params', async () => {
 			await expect( newsApi.getEverything() ).resolves.toEqual({ });
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/everything?${ querystring.stringify({ apiKey: TEST_API_KEY }) }`
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/everything?${ querystring.stringify({ apiKey: TEST_API_KEY }) }`
 			);
 		});
 
@@ -134,8 +140,8 @@ describe('NewsAPI tests', () => {
 				})
 			).resolves.toEqual({ });
 
-			expect(axios.get).toHaveBeenCalledWith(
-				`http://newsapi.org/v2/everything?` + [
+			expect(fetch).toHaveBeenCalledWith(
+				`https://newsapi.org/v2/everything?` + [
 					querystring.stringify({ apiKey: TEST_API_KEY }),
 					querystring.stringify({ q: 'query' }),
 					querystring.stringify({ qInTitle: 'titleQuery' }),

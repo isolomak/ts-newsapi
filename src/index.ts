@@ -1,5 +1,5 @@
-import axios from 'axios';
-import * as querystring from 'querystring';
+import fetch from 'node-fetch';
+import querystring from 'querystring';
 import {
 	INewsApiEverythingParams,
 	INewsApiResponse, INewsApiSourceParams,
@@ -14,7 +14,7 @@ export * from './types';
  */
 export default class NewsAPI {
 
-	private static _URL = 'http://newsapi.org/v2';
+	private static _URL = 'https://newsapi.org/v2';
 
 	private readonly _apiKey: string;
 
@@ -80,8 +80,11 @@ export default class NewsAPI {
 			);
 		}
 
-		const response = await axios.get<INewsApiResponse>(`${ endpointUrl }?${ queries.join('&') }`);
-		return response.data;
+		const response = await fetch(`${ endpointUrl }?${ queries.join('&') }`);
+
+		const data = await response.json();
+
+		return data as INewsApiResponse;
 	}
 
 	/**
@@ -160,8 +163,11 @@ export default class NewsAPI {
 			);
 		}
 
-		const response = await axios.get<INewsApiResponse>(`${ endpointUrl }?${ queries.join('&') }`);
-		return response.data;
+		const response = await fetch(`${ endpointUrl }?${ queries.join('&') }`);
+
+		const data = await response.json();
+
+		return data as INewsApiResponse;
 	}
 
 	/**
@@ -192,10 +198,11 @@ export default class NewsAPI {
 			);
 		}
 
-		const response = await axios.get<INewsApiSourcesResponse>(`${ endpointUrl }?${ queries.join('&') }`);
-		return response.data;
+		const response = await fetch(`${ endpointUrl }?${ queries.join('&') }`);
+
+		const data = await response.json();
+
+		return data as INewsApiSourcesResponse;
 	}
 
 }
-
-
